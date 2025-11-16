@@ -1,4 +1,3 @@
-# ui.py
 import tkinter as tk
 from tkinter import ttk
 from almanax_api import fetch_almanax
@@ -10,7 +9,7 @@ class AlmanaxApp:
         self.root = root
         self.root.title("🌿 Almanax Dofus - Guide Journalier")
         self.root.geometry("750x600")
-        self.root.configure(bg="#2b2a24")  # fond sombre vert/brun
+        self.root.configure(bg="#2b2a24")  
         self.root.resizable(False, False)
 
         self.style = ttk.Style()
@@ -33,7 +32,7 @@ class AlmanaxApp:
         self.style.map("TButton", background=[("active", "#c9b56d")])
 
     def create_widgets(self):
-        # Bannière
+
         title_frame = tk.Frame(self.root, bg="#2b2a24")
         title_frame.pack(pady=10)
         title_label = tk.Label(
@@ -54,7 +53,6 @@ class AlmanaxApp:
         )
         subtitle_label.pack(pady=2)
 
-        # Frame du jour
         self.current_frame = ttk.LabelFrame(self.root, text="📅 Aujourd’hui", padding=15)
         self.current_frame.pack(fill="x", padx=15, pady=10)
 
@@ -67,11 +65,9 @@ class AlmanaxApp:
         self.lbl_bonus = ttk.Label(self.current_frame, text="Bonus : ")
         self.lbl_bonus.grid(row=3, column=0, sticky="w", pady=2)
 
-        # Ligne de séparation
         sep = ttk.Separator(self.root, orient="horizontal")
         sep.pack(fill="x", padx=20, pady=10)
 
-        # Frame des prochains jours
         self.upcoming_frame = ttk.LabelFrame(self.root, text="🗓️ Prochains jours", padding=15)
         self.upcoming_frame.pack(fill="both", expand=True, padx=15, pady=5)
 
@@ -92,11 +88,9 @@ class AlmanaxApp:
 
         self.tree.pack(fill="both", expand=True, pady=5)
 
-        # Bouton refresh stylé
         self.btn_refresh = ttk.Button(self.root, text="🔄 Rafraîchir les données", command=self.load_data)
         self.btn_refresh.pack(pady=12)
 
-        # Footer
         footer = tk.Label(
             self.root,
             text=f"Mis à jour : {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}",
@@ -121,11 +115,9 @@ class AlmanaxApp:
             self.lbl_quantity.config(text="📦 Quantité : –")
             self.lbl_bonus.config(text="✨ Bonus : –")
 
-        # Nettoyer le tableau
         for row in self.tree.get_children():
             self.tree.delete(row)
 
-        # Ajouter les jours à venir
         for offset in range(1, 7):
             entry = fetch_almanax(offset)
             if entry:

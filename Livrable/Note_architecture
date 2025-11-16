@@ -1,0 +1,96 @@
+🧱 Découpage en responsabilités
+1. UI (ui.py)
+
+Gestion de l’interface Tkinter
+
+Rendu, thèmes, labels, TreeView
+
+Interactions utilisateur
+
+Rafraîchissement des données
+
+❌ Aucun appel réseau directement dans l’UI
+→ Bon respect du découplage.
+
+2. API (almanax_api.py)
+
+Appels HTTP vers l’API Dofus
+
+Parsing JSON
+
+Normalisation des données (format commun interne)
+
+→ Le module expose une seule fonction :
+fetch_almanax(offset)
+✔ Simplicité
+✔ Facile à mocker
+
+3. Utils (utils.py)
+
+Fonctions génériques et sans dépendance : formatage de date
+
+Pas de logique métier
+
+→ Conforme aux bonnes pratiques.
+
+4. main.py
+
+Point d’entrée
+
+Bootstrapping Tkinter
+
+Zéro logique métier
+✔ Minimal, propre
+
+🔗 Dépendances & flux de données
+UI  →  API (fetch data)
+UI  →  Utils (format)
+API →  requests (lib externe)
+
+
+Aucun import croisé → architecture saine.
+
+🧠 Choix d’architecture (KISS / DRY / YAGNI)
+✔ KISS (Keep It Simple, Stupid)
+
+Pas de classes complexes
+
+Pas d’héritage inutile Tkinter
+
+Un seul fichier pour l’API
+
+Aucun pattern overkill (MVC, MVVM… inutile ici)
+
+✔ DRY (Don’t Repeat Yourself)
+
+fetch_almanax() centralise tous les appels API
+
+Formatage de date isolé dans utils
+
+Style Tkinter regroupé dans apply_custom_theme()
+
+✔ YAGNI (You Aren’t Gonna Need It)
+
+Ce qui a volontairement été non implémenté :
+
+Mise en cache locale
+
+Multi-langues
+
+Fichiers de configuration
+
+Tests unitaires avancés
+
+Gestion d’état complexe
+
+→ Correct pour une application simple et mono-écran.
+
+🔧 Améliorations possibles
+
+Externaliser le thème dans theme.py
+
+Introduire un fichier config.py pour les constantes
+
+Ajouter un logger réel (logging)
+
+Implémenter un cache mémoire

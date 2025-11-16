@@ -1,4 +1,3 @@
-# utils.py
 from datetime import datetime
 
 def format_date_fr(datestr: str) -> str:

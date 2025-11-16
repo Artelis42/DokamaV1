@@ -1,4 +1,3 @@
-# almanax_api.py
 import requests
 from datetime import datetime, timedelta
 
@@ -18,7 +17,6 @@ def fetch_almanax(day_offset: int = 0):
         resp.raise_for_status()
         data = resp.json()
 
-        # Vérification que la structure est correcte
         tribute = data.get("tribute", {})
         item = tribute.get("item", {})
         quantity = tribute.get("quantity", "–")
